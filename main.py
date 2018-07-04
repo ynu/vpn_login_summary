@@ -25,7 +25,7 @@ def parse(line):
 
 summary_data = {}
 def parse_log_file(log_file):
-    with open(log_file) as file:
+    with open(log_file, encoding='gb18030') as file:
         for line in file:
             vpn_account = parse(line)
             if vpn_account:
@@ -46,8 +46,9 @@ def write_result_to_csv(csv_file_path):
             logger.info('write summary data {}', [key, value])
             spamwriter.writerow([key, value])
 
-for log_file in find_log_files('data'):
-    logger.info('process log file {}', log_file)
+log_files = find_log_files('data')
+for idx, log_file in enumerate(log_files):
+    logger.info('process log file {}, current percentage {}', log_file, "{percentage:.0%}".format(percentage=(idx + 1)/len(log_files)))
     parse_log_file(log_file)
 logger.info('write summary data file {}', "summary.csv")
 write_result_to_csv("summary.csv")
