@@ -20,7 +20,7 @@ class StyleAdapter(logging.LoggerAdapter):
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 # create file handler which logs even debug messages
-fh = logging.FileHandler('main.log')
+fh = logging.FileHandler('main.log', 'w', 'utf-8')
 fh.setLevel(logging.DEBUG)
 # create console handler with a higher log level
 ch = logging.StreamHandler()
